@@ -1,15 +1,19 @@
 import React, { Fragment } from 'react';
-import {Header,Footer,Results} from "./components/";
-import Paper from '@material-ui/core/Paper';
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {Home,SignIn} from "./pages";
+
+
 
 function App() {
   return (
+  <Router>
     <Fragment>
-      <Header />
-      <Paper><h1>History in the making</h1></Paper>
-      <Results />
-      <Footer />
+      <Switch>
+         <Route path="/" exact component={Home}/>
+         <Route path="/signup" component={SignIn}/>
+      </Switch>
     </Fragment>
+    </Router>
   );
 }
 
