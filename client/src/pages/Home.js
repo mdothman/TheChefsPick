@@ -6,7 +6,7 @@ export default function Home(){
     return (
         <Fragment>
           <Header />
-          <Paper><h1>History in the making</h1></Paper>
+          <Paper><h1>You're the Chef, so make your pick!</h1></Paper>
           <Results />
           <Footer />
         </Fragment>

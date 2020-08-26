@@ -1,11 +1,21 @@
 import React, { Fragment } from "react";
 import {Container,Grid,Card,CardMedia,CardContent,CardActions,Typography,Button } from "@material-ui/core"
+import { makeStyles } from '@material-ui/core/styles';
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const useStyles = makeStyles({
+  pictureFood: {
+    paddingTop: '56.25%'
+  },
+});
+
+
+const cards = [1, 2, 3, 4,5,6,7,8,9];
+
+
 
 
 export default function Results(){
-
+  const classes = useStyles();
 
     return (
         <Fragment>
@@ -15,6 +25,7 @@ export default function Results(){
         <Grid item key={card} xs={12} sm={6} md={4}>
           <Card >
             <CardMedia
+            className={classes.pictureFood}
               image="https://source.unsplash.com/random"
               title="Image title"
             />
