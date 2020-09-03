@@ -1,28 +1,57 @@
-import React, { Fragment } from "react";
-import {Container,Grid,Card,CardMedia,CardContent,CardActions,Typography,Button } from "@material-ui/core"
+import React, {useState, useEffect} from "react";
+import {Container,Grid,Card,CardMedia,CardContent,CardActions,Typography,TextField,Button } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
+ 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
   pictureFood: {
     paddingTop: '56.25%'
   },
-});
+  ingredients:{
+    margin: theme.spacing(1),
+      width: '25ch',
+  }
+}));
 
 
-const cards = [1, 2, 3, 4,5,6,7,8,9];
+
+
 
 
 
 
 export default function Results(){
   const classes = useStyles();
+  const [ingredients, setIngredients] = useState({})
+
+console.log(ingredients)
+  const ingredientsInput = event => {
+    const {name, value} = event.target
+    setIngredients({...ingredients, [name]:value})
+    console.log(ingredients)
+  }
+
+  // const ingredientList = ingredients.map(ingredient=>
+  //     ingredient + "%2C")
+
+  const handleIngredientsSubmit = event => {
+    event.preventDefault();
+    console.log(ingredients)
+   
+  }
 
     return (
-        <Fragment>
-<Container maxWidth="md">
-    <Grid container spacing={4}>
-      {cards.map((card) => (
-        <Grid item key={card} xs={12} sm={6} md={4}>
+
+  <Container maxWidth="md">
+    <form autoComplete="off" className={classes.ingredients}>
+      <TextField name="ingredient1" onChange={ingredientsInput} ></TextField>
+      <TextField name="ingredient2" onChange={ingredientsInput}></TextField>
+      <TextField name="ingredient3" onChange={ingredientsInput} ></TextField>
+      <Button onClick={handleIngredientsSubmit}>Submit</Button>
+    </form>
+    {/* <Grid container spacing={4}>
+      {results.map((result) => (
+        <Grid item key={result.id} xs={12} sm={6} md={4}>
           <Card >
             <CardMedia
             className={classes.pictureFood}
@@ -48,7 +77,7 @@ export default function Results(){
           </Card>
         </Grid>
       ))}
-    </Grid>
+    </Grid> */}
   </Container>
-</Fragment>
+
     )}

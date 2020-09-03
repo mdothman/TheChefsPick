@@ -1,12 +1,24 @@
 import React, { Fragment } from 'react';
 import {Header,Footer,Results} from "../components";
-import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles({
+  root: {
+    width: '100%',
+    maxWidth: 500,
+    backgroundColor:"inherit"
+  },
+});
 
 export default function Home(){
-    return (
+
+  const classes = useStyles()
+  
+  return (
         <Fragment>
           <Header />
-          <Paper><h1>You're the Chef, so make your pick!</h1></Paper>
+          <Typography className={classes.root} variant="h3" color="inherit" >You're the Chef, so take your pick!</Typography>
           <Results />
           <Footer />
         </Fragment>
