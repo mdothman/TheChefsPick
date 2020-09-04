@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Container,Grid,Card,CardMedia,CardContent,CardActions,Typography,TextField,Button } from "@material-ui/core"
+import {Container,List,ListItem,ListItemText,Grid,Card,CardMedia,CardContent,CardActions,Typography,TextField,Button } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme)=>({
 export default function Results(){
   const classes = useStyles();
   const [ingredients, setIngredients] = useState({})
-
+  const [recipes, setRecipes] = useState([]);
 
   const ingredientsInput = event => {
     const {name, value} = event.target
@@ -40,6 +40,9 @@ export default function Results(){
     axios.get(url)
     .then(response=>{
       console.log(response)
+      let data = response.data
+      setRecipes(data)
+      
     })
   }
 
@@ -52,35 +55,42 @@ export default function Results(){
       <TextField name="ingredient3" onChange={ingredientsInput} ></TextField>
       <Button onClick={handleIngredientsSubmit}>Submit</Button>
     </form>
-    {/* <Grid container spacing={4}>
-      {results.map((result) => (
-        <Grid item key={result.id} xs={12} sm={6} md={4}>
+    <Grid container spacing={4}>
+      {recipes.map((recipe) => (
+        <Grid item key={recipe.id} xs={12} sm={6} md={4}>
           <Card >
             <CardMedia
             className={classes.pictureFood}
-              image="https://source.unsplash.com/random"
-              title="Image title"
+              image={recipe.image}
+              title={recipe.title}
             />
             <CardContent >
               <Typography gutterBottom variant="h5" component="h2">
-                Heading
+                {recipe.title}
               </Typography>
               <Typography>
-                This is a media card. You can use this section to describe the content.
+                There are {recipe.missedIngredientCount} missing ingredients.
               </Typography>
+              <div>
+              {recipe.missedIngredients.map((missing)=>
+                <List>
+                  <ListItem item key={missing.id}>
+                    <ListItemText>
+                      {missing.name}
+                    </ListItemText>
+                  </ListItem>
+                </List> )}
+              </div>
             </CardContent>
             <CardActions>
               <Button size="small" color="primary">
-                View
-              </Button>
-              <Button size="small" color="primary">
-                Edit
+               Pick this
               </Button>
             </CardActions>
           </Card>
         </Grid>
       ))}
-    </Grid> */}
+    </Grid>
   </Container>
 
     )}
