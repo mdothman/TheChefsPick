@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
 import {Container,Grid,Card,CardMedia,CardContent,CardActions,Typography,TextField,Button } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
- 
+import axios from 'axios'
+
+const API_KEY = process.env.REACT_APP_API_KEY
 
 const useStyles = makeStyles((theme)=>({
   pictureFood: {
@@ -24,20 +26,21 @@ export default function Results(){
   const classes = useStyles();
   const [ingredients, setIngredients] = useState({})
 
-console.log(ingredients)
+
   const ingredientsInput = event => {
     const {name, value} = event.target
     setIngredients({...ingredients, [name]:value})
     console.log(ingredients)
   }
 
-  // const ingredientList = ingredients.map(ingredient=>
-  //     ingredient + "%2C")
-
   const handleIngredientsSubmit = event => {
     event.preventDefault();
-    console.log(ingredients)
-   
+    console.log(ingredients.ingredient1)
+    let url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.ingredient1},+${ingredients.ingredient2},+${ingredients.ingredient3}&number=1&apiKey=${API_KEY}`
+    axios.get(url)
+    .then(response=>{
+      console.log(response)
+    })
   }
 
     return (

@@ -12,15 +12,20 @@
         "client": "cd client && npm run start",
         "seed": "node scripts/seedDB.js",
         "install": "cd client && npm install",
-        "build": "cd client && npm run build",
-        "heroku-postbuild": "npm run build"
+        "build": "webpack --env.ENVIRONMENT=production --config webpack.config.build.js",
+        "heroku-postbuild": "npm run build",
+        "dev": "webpack --env.ENVIRONMENT=development --config webpack.config.dev.js"
     },
     "repository": "https://github.com/mdothman/TheChefsPick.git",
     "private": false,
     "dependencies": {
         "axios": "^0.20.0",
         "concurrently": "^5.2.0",
+        "dotenv": "^8.2.0",
         "per-env": "^1.0.2",
         "react-router-dom": "^5.2.0"
+    },
+    "devDependencies": {
+        "webpack-cli": "^3.3.12"
     }
 }
