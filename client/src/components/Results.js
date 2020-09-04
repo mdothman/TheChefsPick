@@ -26,6 +26,7 @@ export default function Results(){
   const classes = useStyles();
   const [ingredients, setIngredients] = useState({})
   const [recipes, setRecipes] = useState([]);
+  const[summary, setSummary] = useState([])
 
   const ingredientsInput = event => {
     const {name, value} = event.target
@@ -45,6 +46,15 @@ export default function Results(){
       
     })
   }
+  const handleViewButton = id =>{
+    let url = `https://api.spoonacular.com/recipes/${id}/summary?apiKey=${API_KEY}`
+    axios.get(url)
+    .then(response=>{
+        console.log(response)
+        let data = response.data.summary
+        setSummary(data)
+    })
+}
 
     return (
 
@@ -83,9 +93,10 @@ export default function Results(){
               </div>
             </CardContent>
             <CardActions>
-              <Button size="small" color="primary">
-               Pick this
-              </Button>
+           <Button  onClick={()=>handleViewButton(recipe.id)}>
+             <Typography variant="button">Summary</Typography>
+             </Button>
+              <Typography variant="subtitle2">{summary}</Typography>
             </CardActions>
           </Card>
         </Grid>
