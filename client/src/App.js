@@ -7,12 +7,10 @@ import {Home,SignIn} from "./pages";
 function App() {
   return (
   <Router>
-    <Fragment>
       <Switch>
          <Route path="/" exact component={Home}/>
          <Route path="/signup" component={SignIn}/>
       </Switch>
-    </Fragment>
     </Router>
   );
 }

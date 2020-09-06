@@ -4,10 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  root: {
+  infoCard: {
     width: '100%',
     maxWidth: 500,
-    backgroundColor:"inherit"
+    flexGrow:1,
+    position:"static",
+  
   },
 });
 
@@ -18,7 +20,6 @@ export default function Home(){
   return (
         <Fragment>
           <Header />
-          <Typography className={classes.root} variant="h3" color="inherit" >You're the Chef, so take your pick!</Typography>
           <Results />
           <Footer />
         </Fragment>

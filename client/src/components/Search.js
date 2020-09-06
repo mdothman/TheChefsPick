@@ -6,11 +6,9 @@ import axios from 'axios'
 const API_KEY = process.env.REACT_APP_API_KEY
 
 const useStyles = makeStyles((theme)=>({
-  infoCard: {
-
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  
+  root:{
+    flexGrow: 1,
+    padding: '0 30px',
   },
   pictureFood: {
     paddingTop: '56.25%'
@@ -21,6 +19,7 @@ const useStyles = makeStyles((theme)=>({
   },
   submit:{
     margin: theme.spacing(1),
+    color: 'inherit'
   }
 }));
 
@@ -66,21 +65,15 @@ export default function Results(){
 }
 
     return (
-    <Container className={classes.root} maxWidth="md">
-      <Card container className={classes.infoCard} xs={12}>
-        <Typography component="h1" variant="h2" align="center" color="textPrimary" >You're the Chef, so take your pick!</Typography>
-      </Card>
-  
-    <Grid container spacing={4}>
-    <Grid item xs={12} sm={6} md={4}>
-      <form autoComplete="off" className={classes.ingredients}>
-        <Typography variant="h6"></Typography>
-      <TextField name="ingredient1" onChange={ingredientsInput}></TextField>
+
+  <Container className={classes.root} maxWidth="md">
+    <form autoComplete="off" className={classes.ingredients}>
+      <TextField name="ingredient1" onChange={ingredientsInput} ></TextField>
+      <TextField name="ingredient2" onChange={ingredientsInput}></TextField>
+      <TextField name="ingredient3" onChange={ingredientsInput} ></TextField>
       <Button className={classes.submit} onClick={handleIngredientsSubmit}>Submit</Button>
     </form>
-    </Grid>
-    
-    
+    <Grid container spacing={4}>
       {recipes.map((recipe) => (
         <Grid item key={recipe.id} xs={12} sm={6} md={4}>
           <Card >

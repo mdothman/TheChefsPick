@@ -5,6 +5,7 @@ import {Paper,Tabs,Tab} from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
+    marginTop: 'auto',
   },
 });
 
@@ -17,7 +18,7 @@ export default function CenteredTabs() {
   };
 
   return (
-    <Paper className={classes.root}>
+    <div className={classes.root}>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -29,6 +30,6 @@ export default function CenteredTabs() {
         <Tab label="Item Two" />
         <Tab label="Item Three" />
       </Tabs>
-    </Paper>
+    </div>
   );
 }
