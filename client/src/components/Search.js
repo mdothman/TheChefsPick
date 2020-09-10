@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import {Container,Grid,Typography,TextField,Button,Card,CardMedia,CardContent,List} from "@material-ui/core"
+import {Container,Grid,Typography,TextField,Button,Card,CardMedia,CardActionArea,CardContent,CardActions,List} from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
+import API from '../utils/API';
 
 const API_KEY = process.env.REACT_APP_API_KEY
 
@@ -44,13 +45,23 @@ export default function Search(){
   const handleIngredientsSubmit = event => {
     event.preventDefault();
     console.log(ingredients)
-    let url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.ingredient1},+${ingredients.ingredient2},+${ingredients.ingredient3}&number=1&apiKey=${API_KEY}`
+    let url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.ingredient1},+${ingredients.ingredient2},+${ingredients.ingredient3}&number=2&rank=1&apiKey=${API_KEY}`
     axios.get(url)
     .then(response=>{
       console.log(response)
       let data = response.data
       setRecipes(data)
     })
+  }
+  const handleClick = (recipe) => {
+    navigator.clipboard.writeText(recipe)
+    console.log(recipe)
+  }
+
+  const saveRecipe = (id,name) => {
+ 
+  API.saveRecipes(id,name)
+
   }
 
     return (
@@ -93,6 +104,8 @@ export default function Search(){
   {recipes.map((recipe) => (
         <Grid item key={recipe.id} xs={12} sm={6} md={4}>
           <Card>
+            
+            <CardActionArea onClick={()=>handleClick(recipe.title)}>
             <CardMedia
             className={classes.pictureFood}
               image={recipe.image}
@@ -117,6 +130,16 @@ export default function Search(){
              </List> 
              
             </CardContent>
+
+            </CardActionArea>
+           <CardActions>
+             <Button size="small" 
+             color="inherit"
+              onClick={()=>saveRecipe( {id:recipe.id, name:recipe.name})}
+              >
+               Save
+             </Button>
+           </CardActions>
             
           </Card>
         </Grid>
