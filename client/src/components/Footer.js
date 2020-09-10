@@ -18,7 +18,8 @@ export default function CenteredTabs() {
   };
 
   return (
-    <div className={classes.root}>
+    <Paper>
+      <div className={classes.root}>
       <Tabs
         value={value}
         onChange={handleChange}
@@ -26,10 +27,11 @@ export default function CenteredTabs() {
         textColor="primary"
         centered
       >
-        <Tab label="Item One" />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
+        <Tab label="Search Results" />
+        <Tab label="Recipe Card Holder" />
       </Tabs>
     </div>
+    </Paper>
+    
   );
 }

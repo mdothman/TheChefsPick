@@ -1,7 +1,7 @@
 import React from 'react';
-import {AppBar,Toolbar,Typography,InputBase,} from '@material-ui/core';
+import {AppBar,Toolbar,Typography} from '@material-ui/core';
 import { fade, makeStyles} from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,19 +67,6 @@ export default function SearchAppBar() {
           <Typography className={classes.title} variant="h6" noWrap>
             The Chef's Pick
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search recipes"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
         </Toolbar>
       </AppBar>
     </div>

@@ -1,7 +1,8 @@
-import Footer from "./Footer"
-import Header from "./Header"
-import Results from "./Results"
+import Footer from "./Footer";
+import Header from "./Header";
+import Search from "./Search";
+import InfoCard from "./InfoCard"
 
 export{
-    Footer,Header,Results
+    Footer,Header,Search,InfoCard
 }

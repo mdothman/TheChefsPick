@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {Container,List,ListItem,ListItemText,Grid,Card,CardMedia,CardContent,CardActions,Typography,TextField,Button } from "@material-ui/core"
+import React, {useState} from "react";
+import {Container,Grid,Typography,TextField,Button,Card,CardMedia,CardContent,List} from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
 
@@ -30,11 +30,10 @@ const useStyles = makeStyles((theme)=>({
 
 
 
-export default function Results(){
+export default function Search(){
   const classes = useStyles();
-  const [ingredients, setIngredients] = useState({})
+  const [ingredients, setIngredients] = useState({});
   const [recipes, setRecipes] = useState([]);
-  const[summary, setSummary] = useState([])
 
   const ingredientsInput = event => {
     const {name, value} = event.target
@@ -44,7 +43,7 @@ export default function Results(){
 
   const handleIngredientsSubmit = event => {
     event.preventDefault();
-    console.log(ingredients.ingredient1)
+    console.log(ingredients)
     let url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients.ingredient1},+${ingredients.ingredient2},+${ingredients.ingredient3}&number=1&apiKey=${API_KEY}`
     axios.get(url)
     .then(response=>{
@@ -54,29 +53,47 @@ export default function Results(){
       
     })
   }
-  const handleViewButton = id =>{
-    let url = `https://api.spoonacular.com/recipes/${id}/summary?apiKey=${API_KEY}`
-    axios.get(url)
-    .then(response=>{
-        console.log(response)
-        let data = response.data.summary
-        setSummary(data)
-    })
-}
 
     return (
-
-  <Container className={classes.root} maxWidth="md">
-    <form autoComplete="off" className={classes.ingredients}>
-      <TextField name="ingredient1" onChange={ingredientsInput} ></TextField>
-      <TextField name="ingredient2" onChange={ingredientsInput}></TextField>
-      <TextField name="ingredient3" onChange={ingredientsInput} ></TextField>
-      <Button className={classes.submit} onClick={handleIngredientsSubmit}>Submit</Button>
+<Container>
+  <Grid container spacing={4}>
+    <Grid item xs={12} sm={6} md={4}>
+      <form autoComplete="off" className={classes.ingredients}>
+      <Typography variant="h6"></Typography>
+     <TextField required 
+      name="ingredient1" 
+      label="Required" 
+      placeholder="Ingredient" 
+      onChange={ingredientsInput}>
+      </TextField>
+      <TextField required 
+      name="ingredient2" 
+      label="Required" 
+      placeholder="Ingredient" 
+      onChange={ingredientsInput}>
+      </TextField>
+      <TextField required 
+      name="ingredient3" 
+      label="Required" 
+      placeholder="Ingredient" 
+      onChange={ingredientsInput}>
+      </TextField>
+      <Button 
+      className={classes.submit} 
+      onClick={handleIngredientsSubmit} 
+      disabled={
+      !(ingredients.ingredient1&&
+        ingredients.ingredient2&&
+        ingredients.ingredient3)}>
+          Submit
+      </Button>
     </form>
-    <Grid container spacing={4}>
-      {recipes.map((recipe) => (
+    </Grid>
+    </Grid>
+  <Grid container spacing={4}>
+  {recipes.map((recipe) => (
         <Grid item key={recipe.id} xs={12} sm={6} md={4}>
-          <Card >
+          <Card>
             <CardMedia
             className={classes.pictureFood}
               image={recipe.image}
@@ -86,30 +103,26 @@ export default function Results(){
               <Typography gutterBottom variant="h5" component="h2">
                 {recipe.title}
               </Typography>
-              <Typography>
+              <Typography variant="subtitle">
                 There are {recipe.missedIngredientCount} missing ingredients.
               </Typography>
-              <div>
+              
+              <List>
               {recipe.missedIngredients.map((missing)=>
-                <List>
-                  <ListItem item key={missing.id}>
-                    <ListItemText>
+                  <ul item key={missing.id}>
+                    <li>
                       {missing.name}
-                    </ListItemText>
-                  </ListItem>
-                </List> )}
-              </div>
+                    </li>
+                  </ul>
+                )}
+             </List> 
+             
             </CardContent>
-            <CardActions>
-           <Button  onClick={()=>handleViewButton(recipe.id)}>
-             <Typography variant="button">Summary</Typography>
-             </Button>
-              <Typography variant="subtitle2">{summary}</Typography>
-            </CardActions>
+            
           </Card>
         </Grid>
       ))}
     </Grid>
-  </Container>
-
-    )}
+</Container>
+    )
+    }
