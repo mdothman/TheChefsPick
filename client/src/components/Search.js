@@ -57,10 +57,22 @@ export default function Search(){
     navigator.clipboard.writeText(recipe)
     console.log(recipe)
   }
+  function loadRecipes() {
+    API.getRecipes()
+      .then(res => 
+        console.log(res)
+        // setRecipes(res.data)
+      )
+      .catch(err => console.log(err));
+  };
 
   const saveRecipe = (id,name) => {
- 
-  API.saveRecipes(id,name)
+ console.log(id,name)
+  API.saveRecipes({id:id,name:name})
+  .then(res =>
+    {console.log(res)
+    loadRecipes()})
+  .catch(err => console.log(err))
 
   }
 
