@@ -50,7 +50,6 @@ export default function Search(){
       console.log(response)
       let data = response.data
       setRecipes(data)
-      
     })
   }
 
@@ -103,7 +102,7 @@ export default function Search(){
               <Typography gutterBottom variant="h5" component="h2">
                 {recipe.title}
               </Typography>
-              <Typography variant="subtitle">
+              <Typography variant="subtitle1">
                 There are {recipe.missedIngredientCount} missing ingredients.
               </Typography>
               
