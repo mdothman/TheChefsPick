@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {Container,Grid,Typography,TextField,Button,Card,CardMedia,CardActionArea,CardContent,CardActions,List} from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
-import SaveButton from './SaveButton';
 import API from '../utils/API';
 
 const API_KEY = process.env.REACT_APP_API_KEY
@@ -67,6 +66,15 @@ export default function Search(){
       .catch(err => console.log(err));
   };
 
+  const saveRecipe = (id,name) => {
+ console.log(id,name)
+  API.saveRecipes({id:id,name:name})
+  .then(res =>
+    {console.log(res)
+    loadRecipes()})
+  .catch(err => console.log(err))
+
+  }
 
     return (
 <Container>
@@ -137,12 +145,12 @@ export default function Search(){
 
             </CardActionArea>
            <CardActions>
-            <SaveButton
-            id={recipe.id}
-            name={recipe.title}
-            >
-              Save
-            </SaveButton>
+             <Button size="small" 
+             color="inherit"
+              onClick={()=>saveRecipe( {id:recipe.id, name:recipe.name})}
+              >
+               Save
+             </Button>
            </CardActions>
             
           </Card>
