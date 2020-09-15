@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import {Container,Grid,Typography,TextField,Button,Card,CardMedia,CardActionArea,CardContent,CardActions,List} from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
-import API from '../utils/API';
 import SaveButton from "./SaveButton";
 
 const API_KEY = process.env.REACT_APP_API_KEY
@@ -58,17 +57,7 @@ export default function Search(){
     navigator.clipboard.writeText(recipe)
     console.log(recipe)
   }
-  function loadRecipes() {
-    API.getRecipes()
-      .then(res => 
-        console.log(res)
-        // setRecipes(res.data)
-      )
-      .catch(err => console.log(err));
-  };
-
   
-
     return (
 <Container>
   <Grid container spacing={4}>

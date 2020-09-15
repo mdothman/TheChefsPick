@@ -1,15 +1,10 @@
-import React, {useState}from 'react';
+import React from 'react';
 import {Button} from '@material-ui/core';
 import API from '../utils/API';
 
-export default function SaveButton(...props){
-const [recipe,setRecipe]= useState({});
+export default function SaveButton(props){
 
 const postToDb = (recipe)=>{
-setRecipe(props,{
-    id:recipe.id,
-    name:recipe.name
-})
 
 API.saveRecipes(recipe)
 .then(()=>console.log(`You added ${recipe.name} to your recipe card holder`))
