@@ -101,6 +101,7 @@ export default function Search(){
       onChange={ingredientsInput}>
       </TextField>
       <Button 
+      type="submit"
       className={classes.submit} 
       onClick={handleIngredientsSubmit} 
       disabled={
