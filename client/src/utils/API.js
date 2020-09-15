@@ -13,7 +13,7 @@ export default {
         return axios.delete('/api/recipes/'+ id)
     },
 
-    saveRecipes:function (recipeData){
+    saveRecipes: function(recipeData) {
         return axios.post('/api/recipes', recipeData)
     }
 };
