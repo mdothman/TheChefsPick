@@ -1,12 +1,14 @@
 import React from 'react';
 import {Button} from '@material-ui/core';
-import API from '../utils/API';
+// import API from '../utils/API';
+import axios from "axios";
 
 export default function SaveButton(props){
 
 const postToDb = (recipe)=>{
-
-API.saveRecipes(recipe)
+console.log(recipe)
+// API.saveRecipes(recipe)
+axios.post("/api/recipes", recipe)
 .then(()=>console.log(`You added ${recipe.name} to your recipe card holder`))
 .catch(err => console.log(err))
 
@@ -15,6 +17,7 @@ API.saveRecipes(recipe)
 return(
     <div>
         <Button 
+        type="primary"
         size="small"
         color="inherit" 
         onClick={()=>

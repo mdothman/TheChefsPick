@@ -7,14 +7,22 @@ import {Home,SignIn} from "./pages";
 function App() {
   return (
   <Router>
+      
+    <div>
       <Switch>
-         <Route exact path={[ "/" , "/recipes" ]}>
-           <Home />
-         </Route>
-         <Route exact path="/signup">
-           <SignIn />
-         </Route>
+        <Route exact path={[ "/" , "/recipes" ]}>
+
+          <Home />
+
+        </Route>
+        <Route exact path="/signup">
+
+          <SignIn />
+          
+        </Route>
       </Switch>
+    </div>
+         
     </Router>
   );
 }
