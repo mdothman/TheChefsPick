@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import {Container,Grid,Typography,TextField,Button,Card,CardMedia,CardActionArea,CardContent,CardActions,List} from "@material-ui/core"
+import {Container,Grid,Typography,TextField,Button} from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
-import SaveButton from "./SaveButton";
+import RecipeCard from "./RecipeCard";
 
 const API_KEY = process.env.REACT_APP_API_KEY
 
@@ -53,10 +53,6 @@ export default function Search(){
       setRecipes(data)
     })
   }
-  const handleClick = (recipe) => {
-    navigator.clipboard.writeText(recipe)
-    console.log(recipe)
-  }
   
     return (
 <Container>
@@ -97,45 +93,7 @@ export default function Search(){
     </Grid>
   <Grid container spacing={4}>
   {recipes.map((recipe) => (
-        <Grid item key={recipe.id} xs={12} sm={6} md={4}>
-          <Card>
-            
-            <CardActionArea onClick={()=>handleClick(recipe.title)}>
-            <CardMedia
-            className={classes.pictureFood}
-              image={recipe.image}
-              title={recipe.title}
-            />
-            <CardContent >
-              <Typography gutterBottom variant="h5" component="h2">
-                {recipe.title}
-              </Typography>
-              <Typography variant="subtitle1">
-                There are {recipe.missedIngredientCount} missing ingredients.
-              </Typography>
-              
-              <List>
-              {recipe.missedIngredients.map((missing)=>
-                  <ul item key={missing.id}>
-                    <li>
-                      {missing.name}
-                    </li>
-                  </ul>
-                )}
-             </List> 
-             
-            </CardContent>
-
-            </CardActionArea>
-           <CardActions>
-            <SaveButton
-            id={recipe.id}
-            name={recipe.title}
-            />
-           </CardActions>
-            
-          </Card>
-        </Grid>
+    RecipeCard(recipe)
       ))}
     </Grid>
 </Container>

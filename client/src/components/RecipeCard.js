@@ -1,46 +1,49 @@
 import React from 'react';
-import {Container, Grid, Card, CardActionArea, CardMedia, CardContent, CardActions,Button, Typography} from '@material-ui/core';
+import {Grid, Card, CardActionArea, CardMedia, CardContent, CardActions,Button, Typography} from '@material-ui/core';
 
 
 
-function RecipeCard(){
+function RecipeCard(recipe){
 
+    
+    console.log(recipe)
 
     return(
-        <Container>
-            <Grid container="true">
-                <Grid item="true">
-                    <Card>
+
+                <Grid item key={recipe.id} xs={12} sm={6} md={4}>
+                    <Card
+                    height = '100%'
+                    display = 'flex'
+                    flexDirection = 'column'
+                    >
+            
                         <CardActionArea>
-                            <CardMedia 
-                            image="https://source.unsplash.com/random"
-                            alt="random image"
-                            title="Random Image"
-                            >
-                            
-                            </CardMedia>
-                            <CardContent>
-                            <Typography gutterBottom="true" variant="h5" component="h2">
-                            Card Heading
+                            <CardMedia
+                            image = {recipe.image}
+                            title = {recipe.title}
+                            style = {{paddingTop:'56.25%'}}
+                            />
+                        <CardContent >
+                            <Typography gutterBottom variant="h5" component="h2">
+                            {recipe.title}
                             </Typography>
                             <Typography>
                             This is a Media card. You can use this section to describe content.
                             </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="large" color="primary">
+                        </CardContent>
+                        <CardActions>
+                            <Button 
+                            size="large" 
+                            color="primary"
+                            type="primary"
+                            >
                                 Click Me!
-                                </Button>
-                            </CardActions>
+                            </Button>
+                        </CardActions>
 
-                        </CardActionArea>
-                    </Card> 
-                </Grid>
-       
-            </Grid>
-         
-        </Container>
-        
+                    </CardActionArea>
+                </Card> 
+            </Grid> 
     )
 
 }
