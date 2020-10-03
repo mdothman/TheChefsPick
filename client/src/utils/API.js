@@ -15,10 +15,9 @@ export default {
 
     saveRecipes: function(recipeData) {
         return axios.post('/api/recipes', recipeData)
-    }
-};
+    },
+    getRandomRecipe:() => axios.get('/api/spoon')
 
-
-
+}
 
 

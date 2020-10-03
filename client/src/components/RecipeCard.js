@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {Grid, Card, CardActionArea, CardMedia, CardContent, CardActions,Button, Typography} from '@material-ui/core';
+import axios from 'axios';
 
 
+const spoonacular_API_KEY = process.env.REACT_APP_API_KEY
 
 function RecipeCard(recipe){
-
+    
+    const [recipeId, setRecipeId] = useState([]);
+    useEffect(()=>
+    setRecipeId(recipe.id)
+    )
+    
+    function getRecipeInformation(){
+        axios.get(`https://api.spoonacular.com/recipes/informationBulk?ids=${recipeId}&apiKey=${spoonacular_API_KEY}`)
+        .then(res=>console.log(res))
+        .catch(err=>console.log(err))
+    }
+    
     
     console.log(recipe)
 
@@ -28,7 +41,10 @@ function RecipeCard(recipe){
                             {recipe.title}
                             </Typography>
                             <Typography>
-                            This is a Media card. You can use this section to describe content.
+                            ({recipeId?
+                            getRecipeInformation
+                            :["No Information available"]
+                            })
                             </Typography>
                         </CardContent>
                         <CardActions>

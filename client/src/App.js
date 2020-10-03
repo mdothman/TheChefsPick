@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import {Home,SignIn} from "./pages";
+import {Header,Footer}from './components'
+import {Home} from "./pages";
 
 
 
@@ -9,18 +10,13 @@ function App() {
   <Router>
       
     <div>
+    <Header />
       <Switch>
-        <Route exact path={[ "/" , "/recipes" ]}>
-
+        <Route exact path="/">
           <Home />
-
-        </Route>
-        <Route exact path="/signup">
-
-          <SignIn />
-          
         </Route>
       </Switch>
+      <Footer />
     </div>
          
     </Router>
