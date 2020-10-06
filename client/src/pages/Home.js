@@ -4,19 +4,28 @@ import API from '../utils/API';
 
 
 export default function Home(){
-  const [randomRecipe, setRandomRecipe] = useState([]);
-  useEffect(()=>loadRandomRecipe(),[]);
+//   const [randomRecipe, setRandomRecipe] = useState([]);
+//   useEffect(()=>loadRandomRecipe(),[]);
 
- const  loadRandomRecipe = () => {
-    API.getRandomRecipe()
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
-  }
+//  const  loadRandomRecipe = () => {
+//     API.getRandomRecipe()
+//      .then(res => console.log(res))
+//     .catch(err => console.log(err));
+//   }
+const [autocomplete, setAutocomplete] = useState([]);
+useEffect(()=>loadAutocomplete(),[]);
+
+const loadAutocomplete = () => {
+  API.getAutocomplete()
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
+}
+
 
   return (
-        <Fragment>
-          <Search />
-        </Fragment>
+        <div>
+          {Search(autocomplete)}
+        </div>
       );
 
     
