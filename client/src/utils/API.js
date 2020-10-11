@@ -16,8 +16,9 @@ export default {
     saveRecipes: function(recipeData) {
         return axios.post('/api/recipes', recipeData)
     },
-    getRandomRecipe:() => axios.get('/api/spoon'),
-    getAutocomplete:()=>axios.get('api/spoon/autocomplete')
+    getRandomRecipe:() => axios.get('/api/spoon/random'),
+    getAutocomplete: ingredient =>axios.get('api/spoon/autocomplete/'+ingredient),
+   
 
 }
 

@@ -4,8 +4,10 @@ const spoonController = require('../../controller/spoonController')
 router.route('/')
 .get(spoonController.getRandomRecipes)
 
-router.route('/autocomplete')
+router.route('/autocomplete/:ingredient')
 .get(spoonController.getAutocomplete)
+
+
 
 
 

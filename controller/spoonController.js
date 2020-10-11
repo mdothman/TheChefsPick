@@ -7,6 +7,7 @@ const spoonAPI = {
     findByIngredients: "findByIngredients?",
     autocomplete: "autocomplete?",
     random: "random?",
+    list: "parseIngredients"
   },
   number: "number",
   ranking: "ranking",
@@ -29,15 +30,11 @@ module.exports = {
   getAutocomplete: (req, res) => {
     axios
       .get(
-        `${process.env.SPOON_URL + functions.autocomplete}&
-      ${spoonAPI.number}=3&q=
-      ${req.body}&
-      ${process.env.SPOON_API_KEY}`
+        `${process.env.SPOON_INGREDIENTS_URL + functions.autocomplete}query=${req.params.ingredient}&${spoonAPI.number}=2&${process.env.SPOON_API_KEY}`
       )
-      .then(({ data }) => {
-        let spoonData = data.recipes;
-        res.json(spoonData);
-      })
+      .then(({ data }) => res.json(data))
       .catch((err) => console.log(err));
   },
+  
+  
 };
