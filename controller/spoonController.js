@@ -17,7 +17,7 @@ module.exports = {
   getRandomRecipes: (req, res) => {
     axios
       .get(
-        `${process.env.SPOON_URL + functions.random}&${spoonAPI.number}=2&${
+        `${process.env.SPOON_RECIPES_URL + functions.random}&${spoonAPI.number}=2&${
           process.env.SPOON_API_KEY
         }`
       )
@@ -35,6 +35,12 @@ module.exports = {
       .then(({ data }) => res.json(data))
       .catch((err) => console.log(err));
   },
+  getRecipe:(req,res) =>{
+    axios
+    .get( `${process.env.SPOON_RECIPES_URL + functions.findByIngredients}ingredients=${req.params.ingredients}&${spoonAPI.number}=2&${process.env.SPOON_API_KEY}`)
+    .then(({ data }) => res.json(data))
+      .catch((err) => console.log(err));
+  }
   
   
 };
