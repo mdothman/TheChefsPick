@@ -27,7 +27,7 @@ export default function Home() {
             setIngredients(data);
           })
           .catch((err) => console.log(err));
-      }, 1000);
+      }, 100);
     } else {
       setInactive(false);
     }

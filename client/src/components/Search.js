@@ -6,7 +6,8 @@ export default function Search({ onInputChange, ingredients, onChange,value }) {
   return (
     <div>
       <Autocomplete
-        autoComplete="true"
+        autoComplete
+        autoHighlight
         onChange={onChange}
         value={value}
         onInputChange={onInputChange}
