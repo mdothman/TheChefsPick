@@ -1,17 +1,23 @@
 import React from 'react';
 import {Chip,Paper} from '@material-ui/core';
 
-export default function IngredientChip(props){
+export default function IngredientChip({recipeSearchObject, setRecipeSearchObject}){
+  const handleDelete = (chipToDelete) => () => {
+    setRecipeSearchObject((chips) =>
+      chips.filter((chip) => chip.key !== chipToDelete.key)
+    );
+  };
+
   return(
   <Paper
   component="ul"
 >
-  {props.recipeSearchObject.map((data) => {
+  {recipeSearchObject.map((data) => {
     return (
       <li key={data.key}>
         <Chip
           label={data.label}
-          onDelete={props.handleDelete}
+          onDelete={handleDelete(data)}
         />
       </li>
     );

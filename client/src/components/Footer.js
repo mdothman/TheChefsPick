@@ -1,13 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {Paper,Tabs,Tab} from '@material-ui/core';
+import {Tabs,Tab} from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme)=>({
   root: {
     flexGrow: 1,
-    marginTop: 'auto',
+    position:'relative',
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
   },
-});
+}));
 
 export default function Footer() {
   const classes = useStyles();
@@ -20,7 +25,7 @@ export default function Footer() {
   };
 
   return (
-    <Paper>
+
       <div className={classes.root}>
       <Tabs
         value={value}
@@ -33,7 +38,6 @@ export default function Footer() {
         <Tab label="Recipe Card Holder" />
       </Tabs>
     </div>
-    </Paper>
     
   );
 }

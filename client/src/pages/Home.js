@@ -12,16 +12,11 @@ export default function Home() {
   const [recipeData, setRecipeData] = useState([]);
   const [value, setValue] = useState("")
 
-  const handleDelete = (chipToDelete) => () => {
-    setRecipeSearchObject((chips) =>
-      chips.filter((chip) => chip.key !== chipToDelete.key)
-    );
-  };
-
+ 
   let timeout = null;
   const handleInputChange = (event, newInputValue) => {
     setValue(...value,newInputValue)
-    if (!newInputValue.length) {
+    if (newInputValue.length === 0) {
       setInactive(true);
     } else if (inactive === false) {
       clearTimeout(timeout);
@@ -45,25 +40,25 @@ export default function Home() {
       setRecipeSearchObject([
         ...recipeSearchObject,
         { key: name, label: value },
-      ])
-      setValue("");
+      ]);
+      setValue('')
       setName(name + 1);
     } else {
       setInactive(false);
     }
   };
-  const handleSubmit = (listOfIngredients) => {
+  const handleSubmit = (event,listOfIngredients) => {
     const joined = listOfIngredients.map((str) => str.replace(/\s/g, ""));
-    joined.length === 0
-      ? setInactive(true)
-      : inactive === false
-      ? API.getRecipe(joined)
+    listOfIngredients.length === 0
+      ? setInactive(true):
+       API.getRecipe(joined)
           .then(({ data }) =>  {
             setRecipeData(data)
+            setSelected([])
           }
           )
           .catch((err) => console.log(err))
-      :setInactive(false)
+      
   };
 
   return (
@@ -86,15 +81,15 @@ export default function Home() {
         <Grid item >
           <IngredientChip
             recipeSearchObject={recipeSearchObject}
-            handleDelete={handleDelete}
+            setRecipeSearchObject={setRecipeSearchObject}
           />
         </Grid>
         <Grid item >
           <Button
-            variant="contained"
-            color="secondary"
+            variant="outlined"
+            color="primary"
             size="large"
-            onClick={() => handleSubmit(selected)}
+            onClick={(event) => handleSubmit(event,selected)}
           >
             Look up recipe
           </Button>
