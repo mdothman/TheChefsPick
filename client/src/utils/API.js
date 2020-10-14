@@ -21,7 +21,7 @@ export default {
 
     getAutocomplete: ingredient =>axios.get('api/spoon/autocomplete/'+ingredient),
 
-    getRecipes: ingredientData => axios.get('api/spoon/recipes/'+ ingredientData)
+    getRecipe: ingredientData => axios.get('api/spoon/recipes/'+ ingredientData)
 
 }
 

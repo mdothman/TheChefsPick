@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Search } from "../components";
-import { Grid, Button, Paper, Chip, Avatar } from "@material-ui/core";
+import React, { useState } from "react";
+import { Search, IngredientChip, RecipeCard } from "../components";
+import { Grid, Button, Container } from "@material-ui/core";
 import API from "../utils/API";
 
 export default function Home() {
@@ -9,7 +9,8 @@ export default function Home() {
   const [recipeSearchObject, setRecipeSearchObject] = useState([]);
   const [name, setName] = useState(1);
   const [inactive, setInactive] = useState(false);
-  const [recipeData, setRecipeData] = useState([])
+  const [recipeData, setRecipeData] = useState([]);
+  const [value, setValue] = useState("")
 
   const handleDelete = (chipToDelete) => () => {
     setRecipeSearchObject((chips) =>
@@ -19,6 +20,7 @@ export default function Home() {
 
   let timeout = null;
   const handleInputChange = (event, newInputValue) => {
+    setValue(...value,newInputValue)
     if (!newInputValue.length) {
       setInactive(true);
     } else if (inactive === false) {
@@ -43,62 +45,66 @@ export default function Home() {
       setRecipeSearchObject([
         ...recipeSearchObject,
         { key: name, label: value },
-      ]);
+      ])
+      setValue("");
       setName(name + 1);
     } else {
       setInactive(false);
     }
   };
-  const handleSubmit=(listOfIngredients)=>{
-    listOfIngredients.length ===0 ? setInactive(true):
-    inactive === false?
-    
-     API.getRecipes(listOfIngredients)
-     .then(({data})=>setRecipeData(data))
-     .catch(err => console.log(err)):
-     setInactive(false)
-     setSelected([])
-  }
- 
+  const handleSubmit = (listOfIngredients) => {
+    const joined = listOfIngredients.map((str) => str.replace(/\s/g, ""));
+    joined.length === 0
+      ? setInactive(true)
+      : inactive === false
+      ? API.getRecipe(joined)
+          .then(({ data }) =>  {
+            setRecipeData(data)
+          }
+          )
+          .catch((err) => console.log(err))
+      :setInactive(false)
+  };
 
   return (
     <div>
-      <Grid container="true">
-        <Grid item="true">
+      <Container>
+      <Grid
+        container
+        spacing={4}
+      >
+        <Grid item >
           <Search
             onInputChange={handleInputChange}
             ingredients={ingredients}
+            value={value}
             onChange={(event, value) => {
               handleSelected(event, value);
             }}
           />
         </Grid>
-        <Paper
-          component="ul"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            listStyle: "none",
-            margin: 0,
-          }}
-        >
-          {recipeSearchObject.map((data) => {
-            return (
-              <li key={data.key}>
-                <Chip
-                  label={data.label}
-                  onDelete={handleDelete(data)}
-                  style={{ margin: "2px" }}
-                />
-              </li>
-            );
-          })}
-        </Paper>
-        <Button variant="contained" color="secondary" size="large" onClick={()=>handleSubmit(selected)} >
-          Look up recipe
-        </Button>
+        <Grid item >
+          <IngredientChip
+            recipeSearchObject={recipeSearchObject}
+            handleDelete={handleDelete}
+          />
+        </Grid>
+        <Grid item >
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            onClick={() => handleSubmit(selected)}
+          >
+            Look up recipe
+          </Button>
+        </Grid>
+        
       </Grid>
+      <Grid
+      container
+      >{recipeData.map(recipe=>RecipeCard(recipe))}</Grid>
+      </Container>
     </div>
   );
 }
