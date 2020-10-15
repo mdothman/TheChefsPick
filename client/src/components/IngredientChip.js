@@ -1,11 +1,14 @@
 import React from 'react';
 import {Chip,Paper} from '@material-ui/core';
 
-export default function IngredientChip({recipeSearchObject, setRecipeSearchObject}){
+export default function IngredientChip({recipeSearchObject, setRecipeSearchObject, setSelected}){
   const handleDelete = (chipToDelete) => () => {
     setRecipeSearchObject((chips) =>
-      chips.filter((chip) => chip.key !== chipToDelete.key)
+      chips.filter((chip) => chip.label !== chipToDelete.label)
     );
+    setSelected((chips) =>
+    chips.filter((chip) => chip !== chipToDelete.label)
+  );
   };
 
   return(

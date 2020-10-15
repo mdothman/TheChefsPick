@@ -21,7 +21,6 @@ export default function Home() {
     } else if (inactive === false) {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        console.log(newInputValue);
         API.getAutocomplete(newInputValue)
           .then(({ data }) => {
             setIngredients(data);
@@ -53,6 +52,7 @@ export default function Home() {
       ? setInactive(true):
        API.getRecipe(joined)
           .then(({ data }) =>  {
+            console.log(data)
             setRecipeData(data)
             setSelected([])
           }
@@ -82,6 +82,7 @@ export default function Home() {
           <IngredientChip
             recipeSearchObject={recipeSearchObject}
             setRecipeSearchObject={setRecipeSearchObject}
+            setSelected={setSelected}
           />
         </Grid>
         <Grid item >
