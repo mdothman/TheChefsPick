@@ -14,28 +14,29 @@ const useStyles = makeStyles((theme)=>({
   },
 }));
 
-export default function Footer() {
+export default function Footer({setPage,page}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-    console.log(value)
-    return value
+    event.preventDefault()
+    setPage(newValue);
+    console.log(newValue)
+    return page
   };
 
   return (
 
       <div className={classes.root}>
       <Tabs
-        value={value}
+        value={page}
         onChange={handleChange}
         indicatorColor="primary"
         textColor="primary"
         centered
       >
-        <Tab label="Search Results" />
-        <Tab label="Recipe Card Holder" />
+        <Tab label="Search " href='/'/>
+        <Tab label="Recipes" href='/recipes' />
       </Tabs>
     </div>
     

@@ -6,7 +6,7 @@ const spoonAPI = {
   functions: {
     findByIngredients: "findByIngredients?",
     autocomplete: "autocomplete?",
-    random: "random?",
+    info: "informationBulk?ids=",
     list: "parseIngredients"
   },
   number: "number",
@@ -14,15 +14,15 @@ const spoonAPI = {
 };
 const { functions } = spoonAPI;
 module.exports = {
-  getRandomRecipes: (req, res) => {
+  getInfo: (req, res) => {
     axios
       .get(
-        `${process.env.SPOON_RECIPES_URL + functions.random}&${spoonAPI.number}=2&${
+        `${process.env.SPOON_RECIPES_URL + functions.info+req.params.ids}&${
           process.env.SPOON_API_KEY
         }`
       )
       .then(({ data }) => {
-        let spoonData = data.recipes;
+        let spoonData = data;
         res.json(spoonData);
       })
       .catch((err) => console.log(err));
@@ -37,7 +37,7 @@ module.exports = {
   },
   getRecipe:(req,res) =>{
     axios
-    .get( `${process.env.SPOON_RECIPES_URL + functions.findByIngredients}ingredients=${req.params.ingredients}&${spoonAPI.number}=2&${process.env.SPOON_API_KEY}`)
+    .get( `${process.env.SPOON_RECIPES_URL + functions.findByIngredients}ingredients=${req.params.ingredients}&${spoonAPI.number}=2&${spoonAPI.ranking}=2&${process.env.SPOON_API_KEY}`)
     .then(({ data }) => res.json(data))
       .catch((err) => console.log(err));
   }

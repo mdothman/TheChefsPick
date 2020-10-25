@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Search, IngredientChip, RecipeCard } from "../components";
-import { Grid, Button, Container } from "@material-ui/core";
+import { Search, IngredientChip, RecipeCard, SaveButton, InfoCard } from "../components";
+import { Grid, Button } from "@material-ui/core";
 import API from "../utils/API";
 
 export default function Home() {
@@ -10,7 +10,8 @@ export default function Home() {
   const [name, setName] = useState(1);
   const [inactive, setInactive] = useState(false);
   const [recipeData, setRecipeData] = useState([]);
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState("");
+  const [open, setOpen] = React.useState(false);
 
  
   let timeout = null;
@@ -52,18 +53,22 @@ export default function Home() {
       ? setInactive(true):
        API.getRecipe(joined)
           .then(({ data }) =>  {
-            console.log(data)
-            setRecipeData(data)
-            setSelected([])
+           API.getInfo(data.map(recipe => recipe.id))
+           .then(res=> {
+             setRecipeData(res.data)
+             setSelected([])
+            })
+           .catch(err => console.log(err))
           }
           )
           .catch((err) => console.log(err))
       
   };
-
+  
   return (
-    <div>
-      <Container>
+    <div >
+     
+        <InfoCard />
       <Grid
         container
         spacing={4}
@@ -92,15 +97,15 @@ export default function Home() {
             size="large"
             onClick={(event) => handleSubmit(event,selected)}
           >
-            Look up recipe
+            Search
           </Button>
         </Grid>
         
       </Grid>
       <Grid
       container
-      >{recipeData.map(recipe=>RecipeCard(recipe))}</Grid>
-      </Container>
+      spacing= {4}
+      >{recipeData.length !== 0? recipeData.map(recipe => RecipeCard(recipe,SaveButton,open,setOpen)):"Cool Beans"}</Grid>
     </div>
   );
 }

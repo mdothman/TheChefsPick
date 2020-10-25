@@ -5,12 +5,11 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
-  CardActions,
-  Button,
   Typography,
 } from "@material-ui/core";
 
-function RecipeCard(recipe) {
+
+function RecipeCard(recipe, Button, open, setOpen,callBack) {
 
   return (
     <Grid item key={recipe.id} xs={12} sm={6} md={4}>
@@ -25,19 +24,15 @@ function RecipeCard(recipe) {
             <Typography gutterBottom variant="h5" component="h2">
               {recipe.title}
             </Typography>
-            {/* <Typography>
-                            ({recipeId?
-                            getRecipeInformation
-                            :["No Information available"]
-                            })
-                            </Typography> */}
+            <Typography
+            display="inline"
+            variant="body1"
+            >
+            {recipe.ingredients?recipe.ingredients.join(". "):recipe.extendedIngredients.map(ingredients => ingredients.original).join(". ")}
+                            </Typography>
           </CardContent>
-          <CardActions>
-            <Button size="large" color="primary" type="primary">
-              Click Me!
-            </Button>
-          </CardActions>
-        </CardActionArea>
+          </CardActionArea>
+          {Button(recipe,open, setOpen,callBack)}
       </Card>
     </Grid>
   );

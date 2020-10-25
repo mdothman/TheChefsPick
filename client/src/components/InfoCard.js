@@ -13,13 +13,19 @@ export default function InfoCard(){
     const classes = useStyles();
     return(
  // This is my informational card to help user navigate page.
-  <Container className={classes.root} maxWidth="md">
-  <Card container xs={12}>
+  <Container className={classes.root} maxWidth='lg'>
+  <Card container={IDBCursorWithValue.toString()} xs={12}>
     <Typography component="h1" variant="h2" align="center" color="textPrimary" >
-      You're the Chef, so take your pick!
+      Take your pick.
+
       </Typography>
     <Typography variant="h5" align="center" color="textSecondary" paragraph>
-      Use the search function to look up different recipes for what is in your kitchen
+     
+      
+    </Typography>
+    <Typography variant="subtitle1" align="center" color="textPrimary" paragraph>
+     
+      Search using Spoonacular api
     </Typography>
   </Card>
   </Container>

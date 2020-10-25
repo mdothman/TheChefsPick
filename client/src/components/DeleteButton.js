@@ -9,14 +9,14 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
 
-const SaveButton = (recipe, open, setOpen)=>{
-  const [...ingredient] = recipe.extendedIngredients.map(ingredients => ingredients.original)
-    const handleSave = (event,recipe) =>{
-        console.log(ingredient)
-        API.saveRecipes({_id:recipe.id,title:recipe.title,image:recipe.image, ingredients:ingredient})
+const DeleteButton = (recipe, open, setOpen,loadRecipes)=>{
+    const handleDelete = (event,recipe) =>{
+        event.preventDefault()
+        console.log(recipe._id)
+        API.deleteRecipe(recipe._id)
         .then(res=>{
-          console.log(res.data)
-          setOpen(true)
+            setOpen(true)
+           
         })
         .catch(err=>console.log(err))
         }
@@ -25,18 +25,18 @@ const SaveButton = (recipe, open, setOpen)=>{
             if (reason === 'clickaway') {
               return;
             }
-        
+            loadRecipes()
             setOpen(false);
           };
     return(
         <div>
             <CardActions>
-            <Button size="small" color="primary" type="primary" onClick={event=>handleSave(event, recipe)}>
+            <Button size="small" color="primary" type="primary" onClick={event=>handleDelete(event, recipe)}>
               Click Me!
             </Button>
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-         {recipe.title} was saved!
+        <Alert onClose={handleClose} severity="error">
+         {recipe.title} was deleted!
         </Alert>
       </Snackbar>
           </CardActions>
@@ -44,4 +44,4 @@ const SaveButton = (recipe, open, setOpen)=>{
     )
   }
 
-  export default SaveButton
+  export default DeleteButton

@@ -1,6 +1,8 @@
-import Home from "./Home"
+import Home from "./Home";
+import RecipeCardHolder from "./RecipeCardHolder";
+
 
 export{
-   Home
+   Home, RecipeCardHolder
 
 }

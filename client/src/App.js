@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {Header,Footer}from './components'
-import {Home} from "./pages";
+import {Home,RecipeCardHolder} from "./pages";
 
 
 
 function App() {
+  const [page, setPage] = useState(0)
   return (
   <Router>
       
@@ -14,11 +15,11 @@ function App() {
     <div>
       <Switch>
         <Route exact path="/">
-          <Home />
+         {page===0?<Home />:<RecipeCardHolder />}
         </Route>
       </Switch>
     </div>
-      <Footer />
+      <Footer setPage={setPage} page={page}/>
     </div>
          
     </Router>
