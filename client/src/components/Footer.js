@@ -1,33 +1,31 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {Tabs,Tab} from '@material-ui/core';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Tabs, Tab } from "@material-ui/core";
 
-const useStyles = makeStyles((theme)=>({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    position:'relative',
+    position: "relative",
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(2),
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
   },
 }));
 
-export default function Footer({setPage,page}) {
+export default function Footer({ setPage, page }) {
   const classes = useStyles();
-  
 
   const handleChange = (event, newValue) => {
-    event.preventDefault()
+    event.preventDefault();
     setPage(newValue);
-    console.log(newValue)
-    return page
+    console.log(newValue);
+    return page;
   };
 
   return (
-
-      <div className={classes.root}>
+    <div className={classes.root}>
       <Tabs
         value={page}
         onChange={handleChange}
@@ -35,10 +33,9 @@ export default function Footer({setPage,page}) {
         textColor="primary"
         centered
       >
-        <Tab label="Search " href='/'/>
-        <Tab label="Recipes" href='/recipes' />
+        <Tab label="Search " href="/" />
+        <Tab label="Recipes" href="/recipes" />
       </Tabs>
     </div>
-    
   );
 }

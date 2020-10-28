@@ -1,28 +1,27 @@
 import axios from "axios";
 
 export default {
-    getRecipes: function(){
-        return axios.get('/api/recipes')
-    },
-    
-    getSingleRecipe: function(id){
-        return axios.get('/api/recipes'+ id)
-    },
+  getRecipes: function () {
+    return axios.get("/api/recipes");
+  },
 
-    deleteRecipe: function(id){
-        return axios.delete('/api/recipes/'+ id)
-    },
+  getSingleRecipe: function (id) {
+    return axios.get("/api/recipes" + id);
+  },
 
-    saveRecipes: function(recipeData) {
-        return axios.post('/api/recipes', recipeData)
-    },
+  deleteRecipe: function (id) {
+    return axios.delete("/api/recipes/" + id);
+  },
 
-    getInfo:ids => axios.get('/api/spoon/'+ids),
+  saveRecipes: function (recipeData) {
+    return axios.post("/api/recipes", recipeData);
+  },
 
-    getAutocomplete: ingredient =>axios.get('api/spoon/autocomplete/'+ingredient),
+  getInfo: (ids) => axios.get("/api/spoon/" + ids),
 
-    getRecipe: ingredientData => axios.get('api/spoon/recipes/'+ ingredientData)
+  getAutocomplete: (ingredient) =>
+    axios.get("api/spoon/autocomplete/" + ingredient),
 
-}
-
-
+  getRecipe: (ingredientData) =>
+    axios.get("api/spoon/recipes/" + ingredientData),
+};

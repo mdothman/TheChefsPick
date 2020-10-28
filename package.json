@@ -13,7 +13,9 @@
         "seed": "node scripts/seedDB.js",
         "install": "cd client && npm install",
         "build": "cd client && npm run build",
-        "heroku-postbuild": "npm run build"
+        "heroku-postbuild": "npm run build",
+        "lucy":"node git.js"
+
     },
     "repository": "https://github.com/mdothman/TheChefsPick.git",
     "private": false,
