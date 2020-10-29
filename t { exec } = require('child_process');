@@ -1,0 +1,240 @@
+[33mcommit 8c6a99ce9cf5e19bc780b168468b28b0f321c1ea[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Oct 28 16:20:58 2020 -0700
+
+    cleaning up code
+
+[33mcommit 791c944441208c1a08e3d0ecbaf1bbc136ec015b[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Oct 28 16:15:54 2020 -0700
+
+    Cleaning up code
+
+[33mcommit 29729da631b62a17db8824e2a8d911ebb05901b0[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Sat Oct 24 22:57:28 2020 -0700
+
+    I have rest operations working now for users recipe card search
+
+[33mcommit b1c6e350aecfba520abafb314870fc8064ba78fe[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Thu Oct 15 13:38:17 2020 -0700
+
+    I had to include the selected state in my ingredient chip so I could delet values in my search
+
+[33mcommit 666805adee7ecc85da9e2729194f104ea01e0ef7[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Oct 14 12:45:27 2020 -0700
+
+    Cleaned up the search bar so it will provide autocomplete and autohighlight, I also shortened the timer for faster autocomplete search results
+
+[33mcommit 558c83266c3e7c7e643c4e50a8380c25806b3e0b[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Oct 14 12:36:07 2020 -0700
+
+    Cleaned up functionality of the application: delete chips, clear search bar, able to update dom on secondary search
+
+[33mcommit fbe8f5868ce77466c2f76c4d4f6e16385f4f90bd[m[33m ([m[1;31mheroku/master[m[33m)[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Oct 14 11:41:21 2020 -0700
+
+    I have an autocomplete search bar that returns results
+
+[33mcommit 29b9730aacc1357ee89c234849086bd679248b18[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Mon Oct 12 20:08:14 2020 -0700
+
+    I now have an autocomplete searchbar that uses spoonacular API to get ingredients and recipes.
+
+[33mcommit 4851758edc26795ff8d765ba750365a6f9e76665[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Sat Oct 10 17:48:00 2020 -0700
+
+    I have an autocomplete search bar for my app
+
+[33mcommit c58bc8aaba351c93c42af970ec556a0e76f5d7e4[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Tue Oct 6 13:50:26 2020 -0700
+
+    Home page will call api and pass to children components
+
+[33mcommit 315d29a95516eda2757cc0e91a9208f48672dec1[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Sat Oct 3 13:19:05 2020 -0700
+
+    I will now be routing to my server for calling my api
+
+[33mcommit bf1d77707e31e3c2cf260bb4ad185eb2ac5d5150[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Sep 16 20:46:05 2020 -0700
+
+    I created a recipe card component
+
+[33mcommit 9d202829dd534b31975e833a456e13b632c8e2be[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Tue Sep 15 14:55:46 2020 -0700
+
+    Optimized development build, re-name functions in Header.js && Footer.js, created a RecipeCard component
+
+[33mcommit 920a2779bc5faee77f11f39c4c7045e70506edaa[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Tue Sep 15 12:24:14 2020 -0700
+
+    The proxy needed to be added to the package.json for my api server to be working
+
+[33mcommit 786589e271ba9829b0a8ddc64f788dc24e1cadc9[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Tue Sep 15 11:53:51 2020 -0700
+
+    I am still receiving 404 errors, but I have removed nodemon errors when starting server
+
+[33mcommit 2805f180153e9fe6a9478e6421dda619e24b1f21[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Tue Sep 15 09:53:02 2020 -0700
+
+    pushing to heroku
+
+[33mcommit 1c362ebdceda37fb9133ba16fe15e3baf74e32e4[m
+Merge: 846b3bb 13f2abf
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Tue Sep 15 09:37:08 2020 -0700
+
+    Merge branch 'master' of https://github.com/mdothman/TheChefsPick
+
+[33mcommit 846b3bba6c7ab312ae0625d704b38f061e2dc038[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Tue Sep 15 09:36:35 2020 -0700
+
+    included api routes in react router
+
+[33mcommit 13f2abf3e74048dcffaec5c4041ac00376385ad7[m
+Author: Muhi-Dean Othman <othmanmuhidean@gmail.com>
+Date:   Mon Sep 14 12:10:29 2020 -0700
+
+    Update README.md
+
+[33mcommit ee0eb1892580b02d6832865a6a4b026c97dfe7fc[m
+Author: Muhi-Dean Othman <othmanmuhidean@gmail.com>
+Date:   Sat Sep 12 15:18:49 2020 -0700
+
+    Update README.md
+
+[33mcommit b0584a42db9d12dcb7b811e73b7df49c20525ea2[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Fri Sep 11 14:04:09 2020 -0700
+
+    Working on retrieving results from api
+
+[33mcommit 065fd288cb0ae65eaafe27e2789c112e0cef764b[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Fri Sep 11 12:01:30 2020 -0700
+
+    Editing Read me
+
+[33mcommit c46a02d6695ae993b5541b18003ad2a0c47dec56[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Thu Sep 10 16:19:53 2020 -0700
+
+    I am saving an id value, and returning undefined for the name. I have placed express and mongoose in depenedencies, and fixed server to run a routes folder.
+
+[33mcommit 93e5e143eadf41e810d5b2dd82480b8a837eee8b[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Thu Sep 10 15:29:05 2020 -0700
+
+    Have yet to set up routes for pages in the middle and back!
+
+[33mcommit 875c82cfe617b3ef529c57cf4c3be0d9a16409a0[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Thu Sep 10 13:31:16 2020 -0700
+
+    New Read me added, with deployed site in description
+
+[33mcommit c13d6c96c9df6fa4ebd9db4561389efaf176b7ec[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Thu Sep 10 13:21:32 2020 -0700
+
+    fixing package json for deployment
+
+[33mcommit fcb1af6809dbbb7cb866dd474c13500254c7e57c[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Thu Sep 10 12:35:01 2020 -0700
+
+    I am ready to deploy website
+
+[33mcommit b3899558b722756ed17534800e9bf429b83a2e33[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Sep 9 19:49:36 2020 -0700
+
+    Stylized the page and simplified code
+
+[33mcommit cc922806b59b64b519528461d6d13ebf4260a3d7[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Sat Sep 5 18:21:06 2020 -0700
+
+    Worked on styling components to fit page properly
+
+[33mcommit e366f14bb31a7978e464ad673188d87c6bee9687[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Fri Sep 4 13:30:01 2020 -0700
+
+    I am retreving results from api for recipe summary
+
+[33mcommit c54586815e655464afee6c585395dcca7e47eb86[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Thu Sep 3 18:27:55 2020 -0700
+
+    I can render results into cards
+
+[33mcommit cd620e6c08f2da39bfcd49c013965670fea0d574[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Thu Sep 3 17:12:34 2020 -0700
+
+    I am succesfully retrieving api response when filling in TextField components
+
+[33mcommit ac82dbdfedc31625f93809eaab7e395db1c1e1c9[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Thu Sep 3 14:50:46 2020 -0700
+
+    I am using a form object method to submit ingredients to api
+
+[33mcommit f822d46a650a891749da8429097f7ab6e520de96[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Aug 26 15:09:17 2020 -0700
+
+    With pictures successfully rendering, user interface design is complete
+
+[33mcommit ba07d488d5ecae647d53269e3e95bc31ae871799[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Aug 12 15:57:36 2020 -0700
+
+    Added react router for a sign in page, and home
+
+[33mcommit 0ae3a13be4bdb0716aeda9279e67521faefab342[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Mon Aug 3 15:12:23 2020 -0700
+
+    I have built server and start scripts for full-stack
+
+[33mcommit f193d82586d884fe12b20f652deeca6eff151dbc[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Jul 29 15:32:12 2020 -0700
+
+    update dependencies for vulnerabilities
+
+[33mcommit 7834776b4a134818c972e03b6be82007de7eddfa[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Jul 29 15:29:04 2020 -0700
+
+    I have updated dependencies, and re-done the README.md
+
+[33mcommit 111219a96919521806db5ad9c26a315a7cafe766[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Wed Jul 29 13:22:44 2020 -0700
+
+    initial commit
+
+[33mcommit 69165a6a9ecc1c711d4ad445c297d67c76f25796[m
+Author: BEELZ <othmanmuhidean@gmail.com>
+Date:   Tue Jul 28 09:23:42 2020 -0700
+
+    Initialize project using Create React App
