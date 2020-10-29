@@ -1,6 +1,6 @@
 import React from "react";
 import { CardActions, Button, Snackbar } from "@material-ui/core";
-import SaveIcon from "@material-ui/icons/Save";
+import DeleteIcon from "@material-ui/icons/Delete";
 import MuiAlert from "@material-ui/lab/Alert";
 import API from "../utils/API";
 
@@ -8,18 +8,10 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const SaveButton = ({ recipe, open, setOpen }) => {
-  const [...ingredient] = recipe.extendedIngredients.map(
-    (ingredients) => ingredients.original
-  );
-  const handleSave = (event, recipe) => {
-    console.log(recipe);
-    API.saveRecipes({
-      _id: recipe.id,
-      title: recipe.title,
-      image: recipe.image,
-      ingredients: ingredient,
-    })
+const DeleteButton = ({ recipe, open, setOpen, loadRecipes }) => {
+  const handleDelete = (event, recipe) => {
+    console.log(recipe._id);
+    API.deleteRecipe(recipe._id)
       .then((res) => {
         setOpen(true);
       })
@@ -30,7 +22,7 @@ const SaveButton = ({ recipe, open, setOpen }) => {
     if (reason === "clickaway") {
       return;
     }
-
+    loadRecipes();
     setOpen(false);
   };
   return (
@@ -38,17 +30,17 @@ const SaveButton = ({ recipe, open, setOpen }) => {
       <CardActions>
         <Button
           size="small"
-          color="primary"
-          startIcon={<SaveIcon />}
           variant="contained"
+          startIcon={<DeleteIcon />}
+          color="secondary"
           type="primary"
-          onClick={(event) => handleSave(event, recipe)}
+          onClick={(event) => handleDelete(event, recipe)}
         >
-          Save
+          Delete
         </Button>
         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity="success">
-            {recipe.title} was saved!
+          <Alert onClose={handleClose} severity="error">
+            {recipe.title} was deleted!
           </Alert>
         </Snackbar>
       </CardActions>
@@ -56,4 +48,4 @@ const SaveButton = ({ recipe, open, setOpen }) => {
   );
 };
 
-export default SaveButton;
+export default DeleteButton;

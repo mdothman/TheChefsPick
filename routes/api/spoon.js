@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const spoonController = require('../../controller/spoonController')
 
-router.route('/')
-.get(spoonController.getRandomRecipes)
+router.route('/:ids')
+.get(spoonController.getInfo)
 
 router.route('/recipes/:ingredients')
 .get(spoonController.getRecipe)

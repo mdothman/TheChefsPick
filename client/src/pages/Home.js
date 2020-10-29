@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { Search, IngredientChip, RecipeCard } from "../components";
-import { Grid, Button, Container } from "@material-ui/core";
+import {
+  Search,
+  IngredientChip,
+  RecipeCard,
+  SaveButton,
+  InfoCard,
+} from "../components";
+import { Grid, Button } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 import API from "../utils/API";
 
 export default function Home() {
@@ -10,96 +17,72 @@ export default function Home() {
   const [name, setName] = useState(1);
   const [inactive, setInactive] = useState(false);
   const [recipeData, setRecipeData] = useState([]);
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState("");
+  const [open, setOpen] = useState(false);
 
- 
-  let timeout = null;
-  const handleInputChange = (event, newInputValue) => {
-    setValue(...value,newInputValue)
-    if (newInputValue.length === 0) {
-      setInactive(true);
-    } else if (inactive === false) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        console.log(newInputValue);
-        API.getAutocomplete(newInputValue)
-          .then(({ data }) => {
-            setIngredients(data);
-          })
-          .catch((err) => console.log(err));
-      }, 100);
-    } else {
-      setInactive(false);
-    }
-  };
-  const handleSelected = (event, value) => {
-    if (value === null) {
-      setInactive(true);
-    } else if (inactive === false) {
-      setSelected([...selected, value]);
-      setRecipeSearchObject([
-        ...recipeSearchObject,
-        { key: name, label: value },
-      ]);
-      setValue('')
-      setName(name + 1);
-    } else {
-      setInactive(false);
-    }
-  };
-  const handleSubmit = (event,listOfIngredients) => {
+  const handleSubmit = (event, listOfIngredients) => {
     const joined = listOfIngredients.map((str) => str.replace(/\s/g, ""));
     listOfIngredients.length === 0
-      ? setInactive(true):
-       API.getRecipe(joined)
-          .then(({ data }) =>  {
-            setRecipeData(data)
-            setSelected([])
-          }
-          )
-          .catch((err) => console.log(err))
-      
+      ? setInactive(true)
+      : API.getRecipe(joined)
+          .then(({ data }) => {
+            API.getInfo(data.map((recipe) => recipe.id))
+              .then((res) => {
+                setRecipeData(res.data);
+                setSelected([]);
+              })
+              .catch((err) => console.log(err));
+          })
+          .catch((err) => console.log(err));
   };
 
   return (
     <div>
-      <Container>
-      <Grid
-        container
-        spacing={4}
-      >
-        <Grid item >
+      <InfoCard />
+      <Grid container spacing={4}>
+        <Grid item>
           <Search
-            onInputChange={handleInputChange}
             ingredients={ingredients}
+            setIngredients={setIngredients}
             value={value}
-            onChange={(event, value) => {
-              handleSelected(event, value);
-            }}
+            setValue={setValue}
+            name={name}
+            setName={setName}
+            open={open}
+            setOpen={setOpen}
+            inactive={inactive}
+            setInactive={setInactive}
           />
         </Grid>
-        <Grid item >
+        <Grid item>
           <IngredientChip
             recipeSearchObject={recipeSearchObject}
             setRecipeSearchObject={setRecipeSearchObject}
+            setSelected={setSelected}
           />
         </Grid>
-        <Grid item >
+        <Grid item>
           <Button
-            variant="outlined"
+            disableElevation={true}
+            variant="contained"
             color="primary"
             size="large"
-            onClick={(event) => handleSubmit(event,selected)}
+            startIcon={<SearchIcon />}
+            onClick={(event) => handleSubmit(event, selected)}
           >
-            Look up recipe
+            Search
           </Button>
         </Grid>
-        
       </Grid>
-      <Grid
-      container
-      >{recipeData.map(recipe=>RecipeCard(recipe))}</Grid>
-      </Container>
+      <Grid container spacing={4}>
+        {recipeData.length !== 0 ? (
+          recipeData.map((recipe) =>
+            RecipeCard(recipe, SaveButton, open, setOpen)
+          )
+        ) : (
+          <Grid item xs={12} sm={6} md={4}></Grid>
+        )}
+      </Grid>
     </div>
   );
 }
