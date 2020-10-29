@@ -2,9 +2,9 @@ const { exec } = require('child_process');
 let args = process.argv;
 args.splice(0, 2);
 let str = args.join(' ');
-
-console.log(str);
 exec('git add .', cbadd);
+
+console.log(str)
 
 function cbadd(err, strout, sdtin) {
   if (err) {
