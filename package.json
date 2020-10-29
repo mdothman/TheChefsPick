@@ -16,7 +16,7 @@
         "build": "cd client && npm run build",
         "heroku-postbuild": "npm run build",
         "preadd": "npm version patch",
-        "add": "node gitAdd.js"
+        "add": "node add.js"
     },
     "repository": "https://github.com/mdothman/TheChefsPick.git",
     "private": false,
