@@ -2,6 +2,8 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import API from "../utils/API";
+import LoadingIndicator from './LoadingIndicator'
+import { trackPromise } from 'react-promise-tracker';
 
 export default function Search({
   ingredients,
@@ -16,6 +18,8 @@ export default function Search({
   setRecipeSearchObject,
   name,
   setName,
+  isLoading,
+  setIsLoading
 }) {
   const handleSelected = (event, value) => {
     event.preventDefault();
@@ -33,9 +37,11 @@ export default function Search({
       setInactive(false);
     }
   };
-  let timeout = null;
+  
 
   const handleInputChange = (event, newInputValue) => {
+    setIsLoading(true)
+    let timeout = null;
     setValue(...value, newInputValue);
     if (newInputValue.length === 0) {
       setInactive(true);
@@ -49,7 +55,7 @@ export default function Search({
               : setIngredients(data);
           })
           .catch((err) => console.log(err));
-      }, 100);
+      }, 200);
     } else {
       setInactive(false);
     }

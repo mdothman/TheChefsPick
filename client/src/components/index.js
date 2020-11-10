@@ -6,6 +6,7 @@ import RecipeCard from "./RecipeCard";
 import IngredientChip from "./IngredientChip";
 import SaveButton from "./SaveButton";
 import DeleteButton from "./DeleteButton";
+import LoadingIndicator from "./LoadingIndicator";
 
 export {
   Footer,
@@ -16,4 +17,5 @@ export {
   IngredientChip,
   SaveButton,
   DeleteButton,
+  LoadingIndicator
 };

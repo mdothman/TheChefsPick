@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Header, Footer } from "./components";
-import { Home, RecipeCardHolder } from "./pages";
+import { Home, RecipeCardHolder,NoMatch } from "./pages";
+
+
+
+
 
 function App() {
   const [page, setPage] = useState(0);
+ 
   return (
     <Router>
       <div>
@@ -14,6 +19,7 @@ function App() {
             <Route exact path="/">
               {page === 0 ? <Home /> : <RecipeCardHolder />}
             </Route>
+            <Route component={NoMatch} />
           </Switch>
         </div>
         <Footer setPage={setPage} page={page} />
