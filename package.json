@@ -12,10 +12,9 @@
         "client": "cd client && npm run start",
         "seed": "node scripts/seedDB.js",
         "install": "cd client && npm install",
-        "prebuild": "npm major patch",
+        "prebuild": "npm version patch",
         "build": "cd client && npm run build",
         "heroku-postbuild": "npm run build",
-        "preadd": "npm version patch",
         "add": "node add.js"
     },
     "repository": "https://github.com/mdothman/TheChefsPick.git",
@@ -28,7 +27,9 @@
         "express": "4.17.1",
         "if-env": "^1.0.4",
         "mongoose": "^5.3.16",
-        "react-router-dom": "^5.2.0"
+        "react-promise-tracker": "^2.1.0",
+        "react-router-dom": "^5.2.0",
+        "react-spinners": "^0.9.0"
     },
     "devDependencies": {
         "nodemon": "^2.0.4",

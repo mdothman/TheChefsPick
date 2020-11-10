@@ -5,12 +5,15 @@ import {
   RecipeCard,
   SaveButton,
   InfoCard,
+  LoadingIndicator
 } from "../components";
 import { Grid, Button } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import API from "../utils/API";
+import { trackPromise } from 'react-promise-tracker';
 
 export default function Home() {
+ 
   const [ingredients, setIngredients] = useState([]);
   const [selected, setSelected] = useState([]);
   const [recipeSearchObject, setRecipeSearchObject] = useState([]);
@@ -19,22 +22,29 @@ export default function Home() {
   const [recipeData, setRecipeData] = useState([]);
   const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading]=useState(true)
 
   const handleSubmit = (event, listOfIngredients) => {
+    setIsLoading(true)
+    setRecipeData([])
     const joined = listOfIngredients.map((str) => str.replace(/\s/g, ""));
     listOfIngredients.length === 0
       ? setInactive(true)
-      : API.getRecipe(joined)
+      :trackPromise( 
+        API.getRecipe(joined)
           .then(({ data }) => {
             API.getInfo(data.map((recipe) => recipe.id))
               .then((res) => {
                 setRecipeData(res.data);
                 setSelected([]);
+                setIsLoading(false)
               })
               .catch((err) => console.log(err));
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err)));
   };
+
+ 
 
   return (
     <div>
@@ -52,6 +62,12 @@ export default function Home() {
             setOpen={setOpen}
             inactive={inactive}
             setInactive={setInactive}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+            selected={selected}
+            setSelected={setSelected}
+            recipeSearchObject={recipeSearchObject}
+            setRecipeSearchObject={setRecipeSearchObject}
           />
         </Grid>
         <Grid item>
@@ -75,13 +91,13 @@ export default function Home() {
         </Grid>
       </Grid>
       <Grid container spacing={4}>
-        {recipeData.length !== 0 ? (
+        {recipeData.length !== 0 ? 
           recipeData.map((recipe) =>
             RecipeCard(recipe, SaveButton, open, setOpen)
           )
-        ) : (
-          <Grid item xs={12} sm={6} md={4}></Grid>
-        )}
+         : 
+          <Grid item xs={12} sm={6} md={4}>{<LoadingIndicator />}</Grid>
+        }
       </Grid>
     </div>
   );
