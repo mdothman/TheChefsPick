@@ -2,6 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import API from "../utils/API";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function Search({
   ingredients,
@@ -20,6 +21,7 @@ export default function Search({
   setIsLoading
 }) {
   const handleSelected = (event, value) => {
+    console.log("handleSelected value = "+value)
     event.preventDefault();
     if (value === null) {
       setInactive(true);
@@ -33,41 +35,31 @@ export default function Search({
       setName(name + 1);
     } else {
       setInactive(false);
+      console.log("Handle selected recipe search object array = "+recipeSearchObject)
     }
   };
-  
-
-  const handleInputChange = (event, newInputValue) => {
-    setIsLoading(true)
-    let timeout = null;
-    setValue(...value, newInputValue);
-    if (newInputValue.length === 0) {
-      setInactive(true);
-    } else if (inactive === false) {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        API.getAutocomplete(newInputValue)
-          .then(({ data }) => {
-            data.length === -1
-              ? setIngredients([{ name: newInputValue, id: name }])
-              : setIngredients(data);
-          })
-          .catch((err) => console.log(err));
-      }, 200);
-    } else {
-      setInactive(false);
-    }
+  const handleOptions = (option, value) =>{
+    console.log("Handle options option = " +option+" &  value = "+ value)
+  }
+  const handleClose = (reason) =>{
+    console.log("The handle close has this reason = "+reason)
+  }
+  const handleInputChange =  (newInputValue) => {
+    setValue(newInputValue)
+    console.log("Your set value = " + value)
+   console.log("Your new input value = " + newInputValue);
+   return newInputValue
   };
   return (
     <div>
       <Autocomplete
-        autoComplete
-        autoHighlight
+        onClose = {(event,reason)=>handleClose(reason)}
         onChange={(event, value) => {
           handleSelected(event, value);
         }}
         value={value}
-        onInputChange={(event, newValue) => handleInputChange(event, newValue)}
+        getOptionSelected = {(option,value)=>{handleOptions(option,value)}}
+        onInputChange={(event, newValue)=>{handleInputChange(newValue)}}
         options={ingredients.map((ingredient) => ingredient.name)}
         style={{ width: 500 }}
         renderInput={(params) => (
